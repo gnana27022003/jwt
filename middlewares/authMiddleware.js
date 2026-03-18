@@ -1,5 +1,5 @@
 const { verifyToken } = require("../services/jwtoken")
-
+//=========>For authentication of users
 
 const authMiddleware = (req, res, next) => {
     try {
@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
         if (!token) {
             return res.json({ message: "Invalid token format Access denied!" })
         }
-
+        //Calling verifyToken() function to verify the tokens
         const decoded = verifyToken(token)
 
         req.userId = decoded.userId

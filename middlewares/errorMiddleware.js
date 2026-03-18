@@ -1,3 +1,5 @@
+
+//===========>To write clean and understandable errors
 const errorMiddleware = async(err,req,res,next)=>{
     if(err){
         

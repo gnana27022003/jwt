@@ -5,6 +5,8 @@ const {  getToken } = require('../services/jwtoken');
 const verifyUserData = async(req,res)=>{
     try{
         const {email,password} = req.body;
+
+         //===>verifying whether the fields are entered or not
         if(!email || !password){
             return res.status(400).json({
                 success:false,
@@ -12,6 +14,8 @@ const verifyUserData = async(req,res)=>{
             })
         }
         const user = await User.findOne({email})
+
+        //comparing hashed password
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch){
             return res.status(400).json({
@@ -19,6 +23,8 @@ const verifyUserData = async(req,res)=>{
                 message:'Invalid credentials!!'
             })
         }
+
+        //using getToken() to generate the token using JWT
         const token = getToken(user)
         if(!token){
             return res.status(400).json({

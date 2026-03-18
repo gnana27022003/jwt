@@ -3,12 +3,15 @@ const bcrypt = require('bcryptjs')
 const storeUserData = async(req,res)=>{
     try{
         const {name,email,password} = req.body;
+
+        //===>verifying whether the fields are entered or not
         if(!name || !email || !password){
             return res.status(400).json({
                 success:true,
                 message:"Please enter all the fields name,email,password"
             })
         }
+        //----->checking the user already exists or not
         const existingUser = await User.findOne({email});
         if(existingUser){
             return res.status(400).json({
@@ -16,7 +19,11 @@ const storeUserData = async(req,res)=>{
                 message:"User already exists!!"
             })
         }
+        //===>Hashing password
         const hashedPassword = await bcrypt.hash(password,10)
+
+
+        //=====>storing user data
         const user = await User.create({
             name,
             email,

@@ -6,9 +6,9 @@ const User = require('../models/user')
 const router = express.Router()
 
 
-router.post('/signup',storeUserData)
+router.post('/signup',storeUserData) //calling storeUserData() to store the user data
 
-router.post('/login',verifyUserData)
+router.post('/login',verifyUserData)//calling the verifyUserData() to verify the user data and generate the token
 
 router.get("/dashboard", authMiddleware, async(req, res) => {
     try{

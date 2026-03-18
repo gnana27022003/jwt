@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-function getToken(user){
+function getToken(user){//this function is for generating the jsonwebtokens whenever the user is logged in
     try{
         const payload = {
             userId:user._id
@@ -16,7 +16,7 @@ function getToken(user){
     }
 }
 
-function verifyToken(token){
+function verifyToken(token){//this function is used to verify the token whenever the user wants to access the routes
     try{
         return jwt.verify(token,process.env.SECRET)
     }
