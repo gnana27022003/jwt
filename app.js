@@ -14,7 +14,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 const router = require('./routes/router')
+const {errorMiddleware} = require('./middlewares/errorMiddleware')
+
 app.use(router)
+
+app.use(errorMiddleware)
 
 
 

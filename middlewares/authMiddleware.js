@@ -12,7 +12,7 @@ const authMiddleware = (req, res, next) => {
         const token = authHeader.split(" ")[1]
 
         if (!token) {
-            return res.json({ message: "Invalid token format" })
+            return res.json({ message: "Invalid token format Access denied!" })
         }
 
         const decoded = verifyToken(token)
@@ -22,9 +22,7 @@ const authMiddleware = (req, res, next) => {
         next()
 
     } catch (err) {
-        return res.status(500).json({
-            message:'Invalid token!! Access denied try again!!'
-        }) 
+        next(err) 
     }
 }
 
